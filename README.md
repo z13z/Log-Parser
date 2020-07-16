@@ -17,4 +17,5 @@ project uses spring java 1.8 and spring boot 2.1.8
 </ul>
 
 <img src="docs/usage_0.png">
+<hr/><br/>
 <img src="docs/usage_1.png">
