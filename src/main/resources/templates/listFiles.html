@@ -1,0 +1,81 @@
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/layout.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<form class="form-horizontal" action="#" th:action="@{/parse}" th:object="${request}" method="post">
+    <fieldset id="excludeRegexesFields">
+
+        <!-- Form Name -->
+        <legend>Parse Log</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="fileName">name</label>
+            <div class="col-md-4">
+                <input id="fileName" name="fileName" type="text" placeholder="fileName" class="form-control input-md" th:field="*{fileName}" required="" />
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="regex">Regex</label>
+            <div class="col-md-4">
+                <input id="regex" name="regex" type="text" placeholder="regex" class="form-control input-md" th:field="*{regex}" required="" />
+            </div>
+        </div>
+
+
+
+        <div th:each="exclRegex, stat : ${request.excludeRegexList}" class="form-group">
+            <label class="col-md-4 control-label" th:for="|excludeRegex__${stat.index}__|">Exclude Regex</label>
+            <div class="col-md-4">
+                <input id="|excludeRegex__${stat.index}__|" name="|excludeRegex__${stat.index}__|" type="text" placeholder="Exclude Regex" class="form-control input-md" th:field="${request.excludeRegexList[__${stat.index}__]}" />
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-4">
+                <button id="submit" name="submit" class="btn btn-primary btn-login">Parse</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+<!--<form class="form-horizontal" method="post">-->
+
+<!--    <button type="button" name="addExcludeRegex">Add item</button>-->
+<!--</form>-->
+
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>File Name</th>
+            <th>Modified Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${files.empty}">
+            <td colspan="2" style="padding-top: 100px;text-align: center; color: red"> No Log Files Available</td>
+        </tr>
+        <tr th:each="file : ${files}">
+            <td><span th:text="${file.name}"></span></td>
+            <td><span th:text="${file.lastModifiedDate}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+<script src="js/jquery-3.1.0.min.js"></script>
+<script src="js/exclude_regex.js"></script>
+
+</html>
