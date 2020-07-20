@@ -10,4 +10,6 @@ public interface FilesDirectoryController {
 	List<LogFile> listFiles();
 
 	File createOutputFile(String inputFileName);
+
+	File getLogFile(String logName);
 }

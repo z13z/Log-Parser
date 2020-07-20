@@ -25,16 +25,26 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="regex">Regex</label>
             <div class="col-md-4">
-                <input id="regex" name="regex" type="text" placeholder="regex" class="form-control input-md" th:field="*{regex}" required="" />
+                <input id="regex" name="regex" type="text" placeholder="regex" class="form-control input-md"
+                       th:field="*{regex}" required=""/>
             </div>
         </div>
 
-
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="writePrevLinesCount">Write Prev Lines Count</label>
+            <div class="col-md-4">
+                <input id="writePrevLinesCount" name="writePrevLinesCount" type="number"
+                       placeholder="writePrevLinesCount" class="form-control input-md" th:field="*{writePrevLinesCount}"
+                       required=""/>
+            </div>
+        </div>
 
         <div th:each="exclRegex, stat : ${request.excludeRegexList}" class="form-group">
             <label class="col-md-4 control-label" th:for="|excludeRegex__${stat.index}__|">Exclude Regex</label>
             <div class="col-md-4">
-                <input id="|excludeRegex__${stat.index}__|" name="|excludeRegex__${stat.index}__|" type="text" placeholder="Exclude Regex" class="form-control input-md" th:field="${request.excludeRegexList[__${stat.index}__]}" />
+                <input id="|excludeRegex__${stat.index}__|" name="|excludeRegex__${stat.index}__|" type="text"
+                       placeholder="Exclude Regex" class="form-control input-md"
+                       th:field="${request.excludeRegexList[__${stat.index}__]}"/>
             </div>
         </div>
 

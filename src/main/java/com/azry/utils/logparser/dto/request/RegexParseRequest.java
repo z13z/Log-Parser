@@ -9,7 +9,9 @@ public class RegexParseRequest {
 
 	private String regex;
 
-	private List<String> excludeRegexList = new ArrayList<String>(){
+	private Integer writePrevLinesCount;
+
+	private List<String> excludeRegexList = new ArrayList<String>() {
 		{
 			add("");
 		}
@@ -29,6 +31,14 @@ public class RegexParseRequest {
 
 	public void setRegex(String regex) {
 		this.regex = regex;
+	}
+
+	public Integer getWritePrevLinesCount() {
+		return writePrevLinesCount;
+	}
+
+	public void setWritePrevLinesCount(Integer writePrevLinesCount) {
+		this.writePrevLinesCount = writePrevLinesCount;
 	}
 
 	public List<String> getExcludeRegexList() {

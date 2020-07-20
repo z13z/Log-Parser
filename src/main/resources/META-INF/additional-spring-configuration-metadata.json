@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "defaultLogFilesDirectory",
+      "type": "java.lang.String",
+      "description": "Default Directory for log files search"
+  }
+] }

@@ -26,7 +26,7 @@ public class RegexParserBean implements RegexParser {
 		try {
 			Pattern pattern = Pattern.compile(request.getRegex());
 			List<Pattern> excludePatterns = request.getExcludeRegexList().stream().filter(s -> !StringUtils.isEmpty(s)).map(Pattern::compile).collect(Collectors.toList());
-			parser.parseLog(request.getFileName(), (line) -> lineContainsStringMatchingRegex(line, pattern, excludePatterns));
+			parser.parseLog(request.getFileName(), (line) -> lineContainsStringMatchingRegex(line, pattern, excludePatterns), request.getWritePrevLinesCount());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

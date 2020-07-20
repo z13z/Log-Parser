@@ -1,6 +1,7 @@
 package com.azry.utils.logparser.services;
 
 import com.azry.utils.logparser.dto.LogFile;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -13,11 +14,14 @@ import java.util.List;
 @Service
 public class FilesDirectoryControllerBean implements FilesDirectoryController {
 
+	@Value("${defaultLogFilesDirectory:.}")
+	private String defaultLogFilesDirectory;
+
 	private static final String OUTPUT_FILE_PREFIX = "out_";
 
 	@Override
 	public List<LogFile> listFiles() {
-		File currentDir = new File(".");
+		File currentDir = new File(defaultLogFilesDirectory);
 		if (currentDir.exists()) {
 			File[] files = currentDir.listFiles();
 			if (files != null) {
@@ -38,7 +42,7 @@ public class FilesDirectoryControllerBean implements FilesDirectoryController {
 
 	@Override
 	public File createOutputFile(String inputFileName) {
-		File out = new File(OUTPUT_FILE_PREFIX + inputFileName);
+		File out = new File(defaultLogFilesDirectory + File.separator + OUTPUT_FILE_PREFIX + inputFileName);
 		try {
 			//noinspection ResultOfMethodCallIgnored
 			out.createNewFile();
@@ -46,5 +50,10 @@ public class FilesDirectoryControllerBean implements FilesDirectoryController {
 			e.printStackTrace();
 		}
 		return out;
+	}
+
+	@Override
+	public File getLogFile(String logName) {
+		return new File(defaultLogFilesDirectory + File.separator + logName);
 	}
 }
