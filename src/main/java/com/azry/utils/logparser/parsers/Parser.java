@@ -44,7 +44,7 @@ public class Parser {
 			String line;
 			boolean writeLine, prevWritten = false;
 			int writePrevLines = wrapLinesAroundCnt == null ? 0 : wrapLinesAroundCnt;
-			Queue<String> prevNonMatchedLines = wrapLinesAroundCnt == null ? new EmptyQueue<>() : new CircularFifoQueue<>(writePrevLines);
+			Queue<String> prevNonMatchedLines = writePrevLines == 0 ? new EmptyQueue<>() : new CircularFifoQueue<>(writePrevLines);
 			while ((line = reader.readLine()) != null) {
 				if (line.length() > LOG_LINE_DATE_PREFIX_LENGTH &&
 						LOG_LINE_DATE_PREFIX_PATTERN.matcher(line.substring(0, LOG_LINE_DATE_PREFIX_LENGTH)).find()) {
